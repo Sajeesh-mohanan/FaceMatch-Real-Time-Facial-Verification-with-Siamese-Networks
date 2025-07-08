@@ -2,7 +2,7 @@
 
 This project implements a **Siamese Neural Network** using TensorFlow for real-time **face verification**. The goal is to determine whether two facial images belong to the same person.
 
-![Research-paper][text](oneshot1.pdf)
+![Research-paper][click to read the paper](oneshot1.pdf)
 
 
 ## 📌 Objective
@@ -62,7 +62,11 @@ Build and train a deep learning model capable of learning face embeddings and ve
 
 This project uses a **Siamese Neural Network** architecture designed for face verification tasks. It compares two input images by passing them through a shared CNN (embedding model), computes the L1 distance between their embeddings, and predicts similarity using a sigmoid layer.
 
+![alt text](images\image-1.png)
+
 ### 🔷 Embedding Model (`make_embedding`)
+
+![alt text](images\image-2.png)
 
 Extracts high-dimensional face embeddings from images.
 
@@ -99,6 +103,8 @@ class L1Dist(Layer):
     def call(self, input_embedding, validation_embedding):
         return tf.math.abs(input_embedding - validation_embedding)
 
+```
+
 
 ## 🎮 Webcam Controls
 
@@ -108,7 +114,6 @@ class L1Dist(Layer):
 | `P` | Capture **Positive** image |
 | `Q` | Quit webcam feed         |
 
----
 
 🧪 Final Output: A probability score indicating face similarity:
 
@@ -118,7 +123,7 @@ class L1Dist(Layer):
 
 ## 📈 Example Output
 
-![alt text](image.png)
+![alt text](images\image.png)
 
 After training, the model can verify if a test image matches a known person based on learned facial embeddings.
 
