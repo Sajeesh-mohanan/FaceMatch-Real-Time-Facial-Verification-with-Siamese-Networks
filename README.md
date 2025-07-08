@@ -32,7 +32,7 @@ Build and train a deep learning model capable of learning face embeddings and ve
 │ ├── negative/ # Non-matching images from LFW
 │
 ├── lfw.tgz # LFW dataset (tar file)
-├── siamesemodelv2.h5 # (Optional) Trained model due to
+├── siamesemodelv2.h5 # Trained model due to
 ├── Facial_verification_using_Siamese_Network.ipynb # Main Jupyter Notebook
 └── README.md # Project description
 
