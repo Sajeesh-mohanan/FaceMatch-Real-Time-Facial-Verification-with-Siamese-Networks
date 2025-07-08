@@ -2,7 +2,7 @@
 
 This project implements a **Siamese Neural Network** using TensorFlow for real-time **face verification**. The goal is to determine whether two facial images belong to the same person.
 
-![alt-text][click to read the paper](oneshot1.pdf)
+![click to read the paper](oneshot1.pdf)
 
 
 ## 📌 Objective
