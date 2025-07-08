@@ -76,6 +76,8 @@ Extracts high-dimensional face embeddings from images.
 
 ### 🔁 Siamese Model (`make_siamese_model`)
 
+![alt text](images/image-4.png)
+
 Compares two face embeddings and predicts whether they belong to the same person.
 
 - **Inputs:** Anchor image & Validation image (both 100x100 RGB)
