@@ -24,18 +24,6 @@ Build and train a deep learning model capable of learning face embeddings and ve
 - Perform real-time face verification using the trained model.
 
 
-## 🗂️ Project Structure
-
-├── data/
-│ ├── anchor/ # Custom face images (reference)
-│ ├── positive/ # Matching face images
-│ ├── negative/ # Non-matching images from LFW
-│
-├── lfw.tgz # LFW dataset (tar file)
-├── siamesemodelv2.h5 # Trained model due to
-├── Facial_verification_using_Siamese_Network.ipynb # Main Jupyter Notebook
-└── README.md # Project description
-
 ## 📊 Dependencies
 
 - Python ≥ 3.7  
@@ -68,6 +56,49 @@ Build and train a deep learning model capable of learning face embeddings and ve
    - Once trained, the model verifies identity in real-time.
    - Face match threshold customizable for accuracy vs. flexibility.
 
+---
+
+## 🧠 Model Architecture
+
+This project uses a **Siamese Neural Network** architecture designed for face verification tasks. It compares two input images by passing them through a shared CNN (embedding model), computes the L1 distance between their embeddings, and predicts similarity using a sigmoid layer.
+
+### 🔷 Embedding Model (`make_embedding`)
+
+Extracts high-dimensional face embeddings from images.
+
+Input: (100, 100, 3)
+
+→ Conv2D(64, kernel_size=10x10, activation='relu')
+→ MaxPooling2D(2x2)
+
+→ Conv2D(128, kernel_size=7x7, activation='relu')
+→ MaxPooling2D(2x2)
+
+→ Conv2D(128, kernel_size=4x4, activation='relu')
+→ MaxPooling2D(2x2)
+
+→ Conv2D(256, kernel_size=4x4, activation='relu')
+→ Flatten()
+
+→ Dense(4096, activation='sigmoid') → Final face embedding vector
+
+---
+
+### 🔁 Siamese Model (`make_siamese_model`)
+
+Compares two face embeddings and predicts whether they belong to the same person.
+
+- **Inputs:** Anchor image & Validation image (both 100x100 RGB)
+- **Embedding Extraction:** Uses the shared `make_embedding()` model
+- **Distance Metric:** Custom L1 distance layer
+- **Classifier:** Dense(1, activation='sigmoid')
+
+```python
+# Custom L1 Distance Layer
+class L1Dist(Layer):
+    def call(self, input_embedding, validation_embedding):
+        return tf.math.abs(input_embedding - validation_embedding)
+
 
 ## 🎮 Webcam Controls
 
@@ -79,7 +110,15 @@ Build and train a deep learning model capable of learning face embeddings and ve
 
 ---
 
+🧪 Final Output: A probability score indicating face similarity:
+
+1 → Same person
+
+0 → Different person
+
 ## 📈 Example Output
+
+![alt text](image.png)
 
 After training, the model can verify if a test image matches a known person based on learned facial embeddings.
 
